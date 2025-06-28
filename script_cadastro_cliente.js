@@ -51,7 +51,13 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        const urlDoServidor = 'https://b5e0-45-234-208-249.ngrok-free.app'; // Endpoint do backend para registrar clientes
+        // **** ATENÇÃO: ESTE É O URL BASE DO NGROK. ****
+        // **** Use o URL EXATO que o ngrok te dá (ex: https://b5e0-45-234-208-249.ngrok-free.app) ****
+        // **** NÃO COLOQUE ESPAÇOS OU CARACTERES EXTRAS NO FINAL! ****
+        const urlDoServidorBase = 'https://b5e0-45-234-208-249.ngrok-free.app'; // <--- O SEU URL DO NGROK
+
+        // **** LINHA CRÍTICA: Construção do URL COMPLETO com a rota /register-client ****
+        const urlDoServidorCadastro = `${urlDoServidorBase}/register-client`;
         
         const opcoes = {
             method: 'POST',
@@ -68,7 +74,8 @@ document.addEventListener('DOMContentLoaded', function() {
             })
         };
 
-        fetch(urlDoServidor, opcoes)
+        // **** AGORA A REQUISIÇÃO SERÁ ENVIADA PARA O URL CORRETO: urlDoServidorCadastro ****
+        fetch(urlDoServidorCadastro, opcoes) 
             .then(response => {
                 // Tratamento para duplicidade de email ou telefone (status 409)
                 if (response.status === 409) { 
@@ -86,7 +93,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 }
                 if (!response.ok) {
-                    return response.json().then(err => { throw new Error(err.message || `Erro HTTP! Status: ${response.status}`); });
+                    // Adicionamos `.text()` aqui para capturar a resposta HTML 404 se a rota não for encontrada.
+                    return response.text().then(text => { 
+                        console.error('Erro de resposta do servidor (Texto):', text);
+                        throw new Error(text || `Erro HTTP! Status: ${response.status}`); 
+                    });
                 }
                 return response.json();
             })
