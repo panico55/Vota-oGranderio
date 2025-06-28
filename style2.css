@@ -117,3 +117,9 @@ figcaption {
             margin: 20px auto;
              color: #fcfafa; /* Qual o maior time do Rio */
         }  
+
+        #curso{
+             margin-top: -55px;
+             font-size: 25px;
+            position: relative;
+        }
