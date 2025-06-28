@@ -70,11 +70,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         listItem.innerHTML = `<div class="team-result-item">
                                                 <img
                                                 src="imagens_tech/${voto.tech_vote}.png"
-                                                alt="${displayName}"
+                                                alt="${displayName}tech"
                                                 class="team-result-img"
                                                 data-rank="${index+1}"
                                                 >
-                                                <span>${displayName}</span>
+                                               
                                              </div>
                         <span>${voto.total_votos}</span>`;
                         listaVotosTechElemento.appendChild(listItem);

@@ -75,7 +75,7 @@ figcaption {
 #tech:hover {
     transform: scale(1.1); /* Cresce a taça em 10% ao passar o mouse */
 }
-#robo{
+#central{
     position: absolute; /* Remove do fluxo normal e permite posicionamento absoluto */
     top: 322px;        /* Define a distância do topo (ajuste conforme necessário) */
     left: 1130px;       /* Define a distância da esquerda (ajuste conforme necessário) */
@@ -85,7 +85,7 @@ figcaption {
     cursor: pointer;
  transition: transform 0.3s ease-in-out; /* Transição para a taça também */
 }
-#robo:hover {
+#central:hover {
     transform: scale(1.1); /* Cresce a taça em 10% ao passar o mouse */
 }
 
