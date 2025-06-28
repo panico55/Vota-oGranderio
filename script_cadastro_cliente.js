@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        const urlDoServidor = 'http://localhost:3000/register-client'; // Endpoint do backend para registrar clientes
+        const urlDoServidor = 'https://b5e0-45-234-208-249.ngrok-free.app'; // Endpoint do backend para registrar clientes
         
         const opcoes = {
             method: 'POST',

@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const timerElement = document.getElementById('timer'); 
 
     // Rotas do backend para obter os resultados agregados
-    const urlResultadosTimes = 'http://localhost:3000/votos-times-results';
-    const urlResultadosTech = 'http://localhost:3000/votos-tech-results';
+    const urlResultadosTimes = 'https://b5e0-45-234-208-249.ngrok-free.app/votos-times-results';
+    const urlResultadosTech = 'https://b5e0-45-234-208-249.ngrok-free.app/votos-tech-results';
 
     let inactivityTimeout; // Variável para armazenar o timeout de inatividade
     const INACTIVITY_DELAY_SECONDS_TO_STAY_ACTIVE = 15; // Tempo de inatividade para "manter a página ativa"
