@@ -86,3 +86,10 @@
             max-width: 80%;
             margin: 20px auto;
         }  
+        
+        #curso{
+             margin-top: -55px;
+             font-size: 25px;
+            position: relative;
+        }
+        

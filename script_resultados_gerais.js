@@ -64,10 +64,19 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 listaVotosTechElemento.innerHTML = ''; // Limpa "Carregando resultados..."
                 if (data.techVotes && data.techVotes.length > 0) {
-                    data.techVotes.forEach(voto => {
+                    data.techVotes.forEach((voto , index) => {
                         const listItem = document.createElement('li');
                         const displayName = voto.tech_vote.replace(/_/g, ' ').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-                        listItem.innerHTML = `<span>${displayName}</span><span>${voto.total_votos}</span>`;
+                        listItem.innerHTML = `<div class="team-result-item">
+                                                <img
+                                                src="imagens_tech/${voto.tech_vote}.png"
+                                                alt="${displayName}"
+                                                class="team-result-img"
+                                                data-rank="${index+1}"
+                                                >
+                                                <span>${displayName}</span>
+                                             </div>
+                        <span>${voto.total_votos}</span>`;
                         listaVotosTechElemento.appendChild(listItem);
                     });
                 } else {
