@@ -6,41 +6,69 @@
     <title>Cadastro de Cliente</title>
     <link rel="stylesheet" href="style.css"> <!-- Reutiliza o CSS principal -->
     <style>
-        /* Estilos específicos para o formulário de cadastro */
-         h1 {
-            margin-top: -250px;
-            position: absolute;
-            font-family: sans-serif; 
+        /* Estilos gerais para o body da página de cadastro, se necessário */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding-top: 20px; /* Adiciona um espaço no topo para a logo */
+            box-sizing: border-box;
         }
-        #curso{
-             margin-top: -55px;
-             font-size: 25px;
-            position: relative;
+        #logo {
+            margin-bottom: 30px; /* Espaço abaixo da logo */
         }
 
-        
+        /* **** ESTILO: Para o H1 principal da página de cadastro **** */
+        #titulo-principal-cadastro {
+            color: #fcfafa;
+            font-size: 3em; /* Exemplo: maior que os outros */
+            margin-top: 0px; /* Ajuste a margem conforme necessidade */
+            margin-bottom: 20px; /* Espaço entre o novo H1 e o h2/H1 abaixo */
+            text-align: center;
+        }
+
+        /* Estilo para o H2 de subtítulo */
+        h2.main-subtitle {
+            color: #fcfafa;
+            font-size: 1.8em;
+            margin-top: 0px; /* Ajustado para estar próximo do H1 principal ou anterior */
+            margin-bottom: 10px; /* Espaço abaixo do subtítulo para o próximo H1 */
+            text-align: center;
+        }
+
+        /* **** ESTILO: Para o H1 específico do formulário (o antigo H1) **** */
+        #titulo-form-cadastro {
+            color: #fcfafa;
+            font-size: 2.5em; /* Tamanho do título que o usuário já tinha */
+            margin-top: 0px; /* Ajuste de margem superior */
+            margin-bottom: 30px; /* Espaço abaixo deste H1 para o contêiner do formulário */
+            text-align: center;
+        }
+
+
+        /* Estilos específicos para o formulário de cadastro */
         .form-container {
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             padding: 30px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin-top: 250px;
+            margin-top: 0px; /* Ajuste a margem superior já que o H1 acima já tem margem */
             width: 90%;
             max-width: 800px; /* Aumentado para acomodar duas colunas */
             text-align: center;
-            display: flex; /* Adicionado para centralizar o formulário dentro dele */
-            flex-direction: column; /* Conteúdo vertical */
-            align-items: center; /* Centraliza itens horizontalmente */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        
-        .form-container h2 {
+        .form-container h2 { /* Este é o H2 DENTRO do form-container "Seus Dados" */
             color: #fcfafa;
             margin-bottom: 25px;
         }
         .form-group {
             margin-bottom: 20px;
             text-align: left;
-            width: 100%; /* Ocupa a largura total da coluna */
+            width: 100%;
         }
         .form-group label {
             display: block;
@@ -52,7 +80,7 @@
         .form-group input[type="email"],
         .form-group input[type="tel"],
         .form-group select {
-            width: calc(100% - 20px); /* Padding */
+            width: calc(100% - 20px);
             padding: 10px;
             border: none;
             border-radius: 8px;
@@ -76,7 +104,7 @@
             color: #fff;
         }
         button {
-            background-color: #4CAF50; /* Verde */
+            background-color: #4CAF50;
             color: white;
             padding: 12px 25px;
             border: none;
@@ -86,7 +114,7 @@
             transition: background-color 0.3s ease;
             opacity: 0.6; 
             cursor: not-allowed;
-            margin-top: 20px; /* Espaço acima do botão */
+            margin-top: 20px;
         }
         button:hover:not(:disabled) {
             background-color: #45a049;
@@ -102,27 +130,26 @@
             color: #FF6666;
         }
 
-        /* **** NOVOS ESTILOS PARA LAYOUT DE COLUNAS **** */
+        /* Estilos para Layout de Colunas */
         #cadastroForm {
-            width: 100%; /* Ocupa a largura total do form-container */
-            display: flex; /* Usa flexbox para organizar os grupos de colunas */
-            flex-wrap: wrap; /* Permite que as colunas quebrem em telas menores */
-            justify-content: center; /* Centraliza as colunas */
-            gap: 20px; /* Espaço entre as colunas */
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
         }
 
         .form-column {
-            flex: 1; /* Faz as colunas ocuparem o espaço disponível */
-            min-width: 300px; /* Largura mínima para cada coluna antes de quebrar */
+            flex: 1;
+            min-width: 300px;
             display: flex;
-            flex-direction: column; /* Os itens dentro da coluna se empilham verticalmente */
-            gap: 10px; /* Espaço entre os form-groups dentro de uma coluna */
+            flex-direction: column;
+            gap: 10px;
         }
-        /* Ajuste para garantir que o "Telefone" e "Curso" fiquem na segunda coluna */
-        .form-column:nth-child(1) { /* Primeira coluna (Nome, Email) */
+        .form-column:nth-child(1) {
             order: 1; 
         }
-        .form-column:nth-child(2) { /* Segunda coluna (Telefone, Curso) */
+        .form-column:nth-child(2) {
             order: 2;
         }
 
@@ -131,9 +158,9 @@
 <body>
     <img id="logo" src="imagens/estaciodesa.png" alt="Logo da Estácio">
 
-    <h1 id = "curso">Alunos do curso de Ciencias da Computação</h1>
-
-    <h1>Cadastre-se para participar!</h1>
+    <h1 id="titulo-principal-cadastro">Bem-vindo ao Cadastro Estácio!</h1> 
+    <h2 class="main-subtitle">Etapa Final: Complete Seu Cadastro</h2>
+    <h1 id="titulo-form-cadastro">Cadastre-se para participar!</h1> 
 
     <div class="form-container">
         <h2>Seus Dados</h2>
@@ -161,21 +188,8 @@
                     <select id="curso_interesse" name="curso_interesse" required>
                         <option value="">Selecione um curso</option>
                         <option value="analise_e_desenvolvimento">Análise e Desenvolvimento de Sistemas</option>
-                        <option value="banco_de_dados">Banco de Dados</option>
-                        <option value="biomedicina">Biomedicina</option>                         
-                        <option value="ciencia_aeronauticas">Ciência Aeronauticas</option>
-                        <option value="ciencia_biologicas">Ciência Biológicas</option>
-                        <option value="ciencia_da_computacao">Ciência da Computação</option>
-                        <option value="ciencia_contabeis">Ciência Contábeis</option>
-                        <option value="ciencia_de_dados">Ciência de dados</option>
-                        <option value="design_grafico">Design Gráfico</option>
-                        <option value="Direito">Direito</option>
-                        <option value="ciencia_de_dados">Educação Física</option>
+                        <option value="ciencia_de_dados">Ciência de Dados</option>
                         <option value="engenharia_de_software">Engenharia de Software</option>
-                        <option value="engenharia_mecanica">Engenharia Mecânica</option>
-                        <option value="engenharia_fisica">Engenharia Física</option>
-                        <option value="engenharia_quimica">Engenharia Química</option>
-                        <option value="estetica">Estética</option>
                         <option value="redes_de_computadores">Redes de Computadores</option>
                         <option value="gestao_de_ti">Gestão de TI</option>
                         <option value="outros">Outros</option>
@@ -188,6 +202,7 @@
     </div>
 
     <!-- Script para esta página de cadastro -->
-    <script src="script_cadastro_cliente.js"></script>
+    <!-- **** Ajuste aqui o 'v=' para um valor novo a cada alteração, para forçar o cache **** -->
+    <script src="script_cadastro_cliente.js?v=202506282100"></script>
 </body>
 </html>
