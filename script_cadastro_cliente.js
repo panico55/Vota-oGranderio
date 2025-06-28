@@ -9,13 +9,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitButton = cadastroForm.querySelector('button[type="submit"]');
 
     // Recupera os votos do sessionStorage
-    const teamVote = sessionStorage.getItem('teamVote') || null; // Pode ser null se o usuário pular a votação de time
-    const techVote = sessionStorage.getItem('techVote') || null; // Pode ser null se o usuário pular a votação de tecnologia
+    const teamVote = sessionStorage.getItem('teamVote') || null; 
+    const techVote = sessionStorage.getItem('techVote') || null; 
 
-    // --- Função para validar o formulário e ativar/desativar o botão ---
     function validateForm() {
         const nomeValido = nomeInput.value.trim() !== '';
-        const emailValido = emailInput.value.trim() !== '' && emailInput.checkValidity(); // checkValidity para formato de email
+        const emailValido = emailInput.value.trim() !== '' && emailInput.checkValidity(); 
         const telefoneValido = telefoneInput.value.trim() !== '';
 
         if (nomeValido && emailValido && telefoneValido) {
@@ -29,71 +28,62 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Adiciona ouvintes para validar o formulário em tempo real
     nomeInput.addEventListener('input', validateForm);
     emailInput.addEventListener('input', validateForm);
     telefoneInput.addEventListener('input', validateForm);
 
-    // Chama a validação inicial ao carregar a página
     validateForm(); 
 
     cadastroForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Impede o envio padrão do formulário
+        event.preventDefault(); 
 
         const nome = nomeInput.value.trim();
         const email = emailInput.value.trim();
         const telefone = telefoneInput.value.trim();
 
-        // Dupla validação no frontend antes de enviar
         if (!nome || !email || !telefone) {
             messageElement.textContent = 'Por favor, preencha todos os campos.';
             messageElement.className = 'message error';
             return;
         }
 
-        // **** ATENÇÃO: ESTE É O URL BASE DO NGROK. ****
-        // **** Use o URL EXATO que o ngrok te dá (ex: https://b5e0-45-234-208-249.ngrok-free.app) ****
-        // **** NÃO COLOQUE ESPAÇOS OU CARACTERES EXTRAS NO FINAL! ****
-        const urlDoServidorBase = 'https://b5e0-45-234-208-249.ngrok-free.app'; // <--- O SEU URL DO NGROK
-
-        // **** LINHA CRÍTICA: Construção do URL COMPLETO com a rota /register-client ****
-        const urlDoServidorCadastro = `${urlDoServidorBase}/register-client`;
+        // **** ATENÇÃO: COPIE O SEU URL ATUAL DO NGROK AQUI. ****
+        // **** O URL ATUAL É: https://b5e0-45-234-208-249.ngrok-free.app ****
+        const urlDoServidorBase = 'https://b5e0-45-234-208-249.ngrok-free.app'; 
         
+        // **** ESTA É A LINHA CRÍTICA: Construção do URL COMPLETO com a rota /register-client ****
+        const urlDoServidorCadastro = `${urlDoServidorBase}/register-client`;
+
         const opcoes = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            // **** NOVO: Envia todos os dados, incluindo os votos recuperados ****
             body: JSON.stringify({ 
                 nome: nome, 
                 email: email, 
                 telefone: telefone,
-                team_vote: teamVote, // Enviando o voto de time
-                tech_vote: techVote  // Enviando o voto de tecnologia
+                team_vote: teamVote, 
+                tech_vote: techVote  
             })
         };
 
-        // **** AGORA A REQUISIÇÃO SERÁ ENVIADA PARA O URL CORRETO: urlDoServidorCadastro ****
+        // **** A REQUISIÇÃO AGORA USA urlDoServidorCadastro, QUE INCLUI A ROTA CORRETA ****
         fetch(urlDoServidorCadastro, opcoes) 
             .then(response => {
-                // Tratamento para duplicidade de email ou telefone (status 409)
                 if (response.status === 409) { 
                     return response.json().then(err => {
                         messageElement.textContent = err.message || 'Erro: Usuário já existente.';
                         messageElement.className = 'message error';
-                        // Limpa os votos temporários (se houver) para uma nova tentativa
                         sessionStorage.removeItem('teamVote');
                         sessionStorage.removeItem('techVote');
-                        // Redireciona para a página inicial após mensagem de erro
                         setTimeout(() => {
                             window.location.href = 'index.html'; 
-                        }, 3000); // Redireciona após 3 segundos
-                        throw new Error(err.message); // Interrompe o fluxo .then()
+                        }, 3000); 
+                        throw new Error(err.message); 
                     });
                 }
                 if (!response.ok) {
-                    // Adicionamos `.text()` aqui para capturar a resposta HTML 404 se a rota não for encontrada.
                     return response.text().then(text => { 
                         console.error('Erro de resposta do servidor (Texto):', text);
                         throw new Error(text || `Erro HTTP! Status: ${response.status}`); 
@@ -105,17 +95,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log('Cliente cadastrado com sucesso:', data);
                 messageElement.textContent = 'Cadastro realizado com sucesso!';
                 messageElement.className = 'message success';
-                // Limpa os votos temporários do sessionStorage após o sucesso
                 sessionStorage.removeItem('teamVote');
                 sessionStorage.removeItem('techVote');
                 
-                // Redireciona para a página de resultados gerais após o cadastro
                 window.location.href = 'resultados_gerais.html'; 
             })
             .catch(error => {
                 console.error('Erro ao cadastrar cliente:', error);
+                let displayMessage = error.message;
+                try {
+                    const parsedError = JSON.parse(error.message);
+                    if (parsedError && parsedError.message) {
+                        displayMessage = parsedError.message;
+                    }
+                } catch (e) {
+                    // Não é um JSON stringificado, usa a mensagem como está
+                }
+
                 if (!messageElement.textContent.includes('Usuário já existente') && !messageElement.textContent.includes('Por favor, preencha')) {
-                    messageElement.textContent = error.message || 'Houve um erro ao cadastrar. Tente novamente.';
+                    messageElement.textContent = displayMessage || 'Houve um erro ao cadastrar. Tente novamente.';
                     messageElement.className = 'message error';
                 }
             });
