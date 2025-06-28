@@ -41,7 +41,7 @@ figcaption {
 
 #wifi{
     position: absolute;
-    top: 330px;
+    top: 410px;
     left: 50px;
     width: 170px;
     height: auto;     /* A altura se ajustará proporcionalmente */
@@ -52,7 +52,7 @@ figcaption {
     transform: scale(1.1); /* Cresce a taça em 10% ao passar o mouse */}
 #cam{
     position: absolute; /* Remove do fluxo normal e permite posicionamento absoluto */
-    top: 360px;        /* Define a distância do topo (ajuste conforme necessário) */
+    top: 440px;        /* Define a distância do topo (ajuste conforme necessário) */
     left: 390px;       /* Define a distância da esquerda (ajuste conforme necessário) */
     width: 135px;      /* Defina a largura da imagem (ajuste conforme necessário) */
     height: auto;     /* A altura se ajustará proporcionalmente */
@@ -64,7 +64,7 @@ figcaption {
     transform: scale(1.1); /* Cresce a taça em 10% ao passar o mouse */
 }#tech{
     position: absolute; /* Remove do fluxo normal e permite posicionamento absoluto */
-    top: 350px;        /* Define a distância do topo (ajuste conforme necessário) */
+    top: 430px;        /* Define a distância do topo (ajuste conforme necessário) */
     left: 720px;       /* Define a distância da esquerda (ajuste conforme necessário) */
     width: 240px;      /* Defina a largura da imagem (ajuste conforme necessário) */
     height: auto;     /* A altura se ajustará proporcionalmente */
@@ -77,7 +77,7 @@ figcaption {
 }
 #central{
     position: absolute; /* Remove do fluxo normal e permite posicionamento absoluto */
-    top: 322px;        /* Define a distância do topo (ajuste conforme necessário) */
+    top: 402px;        /* Define a distância do topo (ajuste conforme necessário) */
     left: 1130px;       /* Define a distância da esquerda (ajuste conforme necessário) */
     width: 180px;      /* Defina a largura da imagem (ajuste conforme necessário) */
     height: auto;     /* A altura se ajustará proporcionalmente */
@@ -102,9 +102,14 @@ figcaption {
             font-family: sans-serif;
             
         }
+        #curso{
+             margin-top: -350px;
+             font-size: 25px;
+            position: relative;
+        }
 
         h1 {
-            margin-top: -150px;
+            margin-top: 10px;
             font-size: 3em; 
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2); /* Sombra para o texto */
             color: #fcfafa; /* Qual o maior time do Rio */
