@@ -47,12 +47,10 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // **** ATENÇÃO: COPIE O SEU URL ATUAL DO NGROK AQUI. ****
+        // **** ATENÇÃO: COLOQUE SEU URL ATUAL DO NGROK AQUI, COM A ROTA /register-client. ****
         // **** O URL ATUAL É: https://b5e0-45-234-208-249.ngrok-free.app ****
-        const urlDoServidorBase = 'https://b5e0-45-234-208-249.ngrok-free.app'; 
-        
-        // **** ESTA É A LINHA CRÍTICA: Construção do URL COMPLETO com a rota /register-client ****
-        const urlDoServidorCadastro = `${urlDoServidorBase}/register-client`;
+        // **** Garanta que o URL abaixo tenha a ROTA /register-client no final. ****
+        const urlDoServidorCadastro = 'https://b5e0-45-234-208-249.ngrok-free.app/register-client'; 
 
         const opcoes = {
             method: 'POST',
@@ -68,7 +66,6 @@ document.addEventListener('DOMContentLoaded', function() {
             })
         };
 
-        // **** A REQUISIÇÃO AGORA USA urlDoServidorCadastro, QUE INCLUI A ROTA CORRETA ****
         fetch(urlDoServidorCadastro, opcoes) 
             .then(response => {
                 if (response.status === 409) { 
